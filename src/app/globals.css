@@ -1,0 +1,83 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+/* =========================================================================
+   DEFINIÇÃO DE VARIÁVEIS CSS BASE (LIGHT MODE)
+   ========================================================================= */
+@layer base {
+  :root {
+    /* Radius */
+    --radius: 0.5rem;
+
+    /* BACKGROUND & TEXTO */
+    --background: 0 0% 100%; 
+    --foreground: 222 22% 14%; 
+
+    /* CORES PRIMÁRIAS (Mapeado para o brandPrimary-500) */
+    --primary: 217 91% 59%; 
+    --primary-foreground: 0 0% 98%; 
+
+    /* CORES SECUNDÁRIAS (Mapeado para o brandSecondary-500) */
+    --secondary: 271 70% 95%; 
+    --secondary-foreground: 271 70% 20%;
+
+    /* DESTRUTIVAS (Mapeado para o error-500) */
+    --destructive: 358 84% 60%;
+    --destructive-foreground: 0 0% 98%;
+
+    /* BORDAS & INPUTS */
+    --border: 214 32% 91%;
+    --input: 214 32% 91%;
+    --ring: 217 91% 59%; 
+
+    /* CORES DO TEMA PADRÃO (shadcn/ui) */
+    --card: 0 0% 100%;
+    --card-foreground: 222 22% 14%;
+    --popover: 0 0% 100%;
+    --popover-foreground: 222 22% 14%;
+    --muted: 210 40% 96%;
+    --muted-foreground: 215 16% 47%;
+    --accent: 210 40% 96%;
+    --accent-foreground: 222 47% 11%;
+  }
+
+  /* =========================================================================
+     DEFINIÇÃO DE VARIÁVEIS CSS (DARK MODE)
+     ========================================================================= */
+  .dark {
+    --background: 222 47% 11%;
+    --foreground: 210 20% 98%;
+    --primary: 217 91% 70%;
+    --primary-foreground: 222 47% 11%;
+    --secondary: 271 70% 15%;
+    --secondary-foreground: 210 20% 98%;
+    --destructive: 358 84% 40%;
+    --destructive-foreground: 210 20% 98%;
+    --border: 217 32% 17%;
+    --input: 217 32% 17%;
+    --ring: 217 91% 70%;
+    --card: 222 47% 11%;
+    --card-foreground: 210 20% 98%;
+    --popover: 222 47% 11%;
+    --popover-foreground: 210 20% 98%;
+    --muted: 217 32% 17%;
+    --muted-foreground: 215 20% 69%;
+    --accent: 217 32% 17%;
+    --accent-foreground: 210 20% 98%;
+  }
+}
+
+/* =========================================================================
+   APLICAÇÃO DE ESTILOS GLOBAIS (APLICAÇÃO DIRETA NO BODY)
+   ========================================================================= */
+@layer base {
+  /* Aplica o fundo e texto padrão do tema no corpo da página */
+  body {
+    /* CORREÇÃO: Aplica a cor diretamente via variável CSS para contornar o erro de ordem */
+    background-color: hsl(var(--background)); 
+    color: hsl(var(--foreground));
+  }
+
+  /* Aplicação de classes padrão em todos os elementos (usa a variável --border) */
+
+}

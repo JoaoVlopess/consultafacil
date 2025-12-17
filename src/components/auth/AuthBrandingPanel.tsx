@@ -1,3 +1,5 @@
+//AuthBrandingPanel
+
 import { Scale, CheckCircle2 } from 'lucide-react'
 
 interface AuthBrandingPanelProps {

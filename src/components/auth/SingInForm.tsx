@@ -213,7 +213,8 @@ export function SignInForm({ userType, onUserTypeChange }: SignInFormProps) {
             </div>
 
             <Button 
-              type="submit" 
+              type="submit"
+              variant="gradient"
               className="w-full h-11"
               disabled={isLoading}
             >

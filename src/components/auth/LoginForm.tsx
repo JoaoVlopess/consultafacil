@@ -53,7 +53,7 @@ export function LoginForm({ userType, onUserTypeChange }: LoginFormProps) {
   }
 
   return (
-    <div className="w-full max-w-md">
+    <div className="w-full max-w-lg">
       {/* Logo mobile */}
       <div className="lg:hidden flex items-center justify-center space-x-3 mb-8">
         <div className="w-10 h-10 bg-gradient-to-br from-blue-600 to-indigo-600 rounded-xl flex items-center justify-center">
@@ -65,7 +65,7 @@ export function LoginForm({ userType, onUserTypeChange }: LoginFormProps) {
       </div>
 
       <Card className="shadow-card">
-        <CardHeader>
+        <CardHeader className="space-y-1 pb-6">
           <CardTitle className="text-2xl">Bem-vindo de volta</CardTitle>
           <CardDescription>
             Entre com suas credenciais para continuar
@@ -103,23 +103,24 @@ export function LoginForm({ userType, onUserTypeChange }: LoginFormProps) {
               }))}
             />
 
-            <div className="flex items-center justify-between">
+            <div className="flex items-center justify-between pt-1">
               <div className="flex items-center space-x-2">
                 <Checkbox id="remember" />
                 <label 
                   htmlFor="remember"
-                  className="text-sm text-slate-600 cursor-pointer"
+                  className="text-sm text-slate-600 cursor-pointer select-none"
                 >
                   Lembrar de mim
                 </label>
               </div>
-              <Button variant="link" size="sm" className="px-0 text-blue-600">
+              <Link href="/recuperar-senha" className="text-sm text-blue-600 hover:underline">
                 Esqueci a senha
-              </Button>
+              </Link>
             </div>
 
             <Button 
-              type="submit" 
+              type="submit"
+              variant="gradient"
               className="w-full h-11"
               disabled={isLoading}
             >

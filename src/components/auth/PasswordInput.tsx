@@ -23,7 +23,7 @@ export function PasswordInput({
 }: PasswordInputProps) {
   const [showPassword, setShowPassword] = useState(false)
 
-  return (
+return (
     <div className="space-y-2">
       <Label htmlFor="password">{label}</Label>
       <div className="relative">
@@ -39,13 +39,13 @@ export function PasswordInput({
           type="button"
           variant="ghost"
           size="sm"
-          className="absolute right-0 top-0 h-full px-3 hover:bg-transparent"
+          className="absolute right-0 top-0 h-full px-3 hover:bg-slate-100 hover:shadow-md transition-all duration-200"
           onClick={() => setShowPassword(!showPassword)}
         >
           {showPassword ? (
-            <EyeOff className="w-4 h-4 text-muted-foreground" />
+            <EyeOff className="w-4 h-4 text-muted-foreground hover:text-slate-700 transition-colors" />
           ) : (
-            <Eye className="w-4 h-4 text-muted-foreground" />
+            <Eye className="w-4 h-4 text-muted-foreground hover:text-slate-700 transition-colors" />
           )}
         </Button>
       </div>

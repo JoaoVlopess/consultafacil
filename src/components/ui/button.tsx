@@ -19,6 +19,7 @@ const buttonVariants = cva(
         ghost:
           "hover:bg-accent hover:text-accent-foreground dark:hover:bg-accent/50",
         link: "text-primary underline-offset-4 hover:underline",
+        gradient: "text-white shadow-md",
       },
       size: {
         default: "h-9 px-4 py-2 has-[>svg]:px-3",
@@ -41,6 +42,7 @@ function Button({
   variant,
   size,
   asChild = false,
+  style,
   ...props
 }: React.ComponentProps<"button"> &
   VariantProps<typeof buttonVariants> & {
@@ -48,10 +50,25 @@ function Button({
   }) {
   const Comp = asChild ? Slot : "button"
 
+  // Adicionar estilo inline para variant gradient
+  const buttonStyle = variant === 'gradient' 
+    ? {
+        background: 'linear-gradient(to right, rgb(37, 99, 235), rgb(79, 70, 229))',
+        ...style
+      } 
+    : style
+
   return (
     <Comp
       data-slot="button"
       className={cn(buttonVariants({ variant, size, className }))}
+      style={buttonStyle}
+      onMouseEnter={variant === 'gradient' ? (e) => {
+        (e.currentTarget as HTMLElement).style.background = 'linear-gradient(to right, rgb(29, 78, 216), rgb(67, 56, 202))'
+      } : undefined}
+      onMouseLeave={variant === 'gradient' ? (e) => {
+        (e.currentTarget as HTMLElement).style.background = 'linear-gradient(to right, rgb(37, 99, 235), rgb(79, 70, 229))'
+      } : undefined}
       {...props}
     />
   )

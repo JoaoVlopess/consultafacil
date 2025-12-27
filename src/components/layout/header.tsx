@@ -13,10 +13,10 @@ import {
 
 // Definimos os itens de navegação para não repetir código
 const navItems = [
-    { name: 'Dashboard', href: '/', icon: 'fas fa-chart-line' }, 
-    { name: 'Clientes', href: '/clientes', icon: 'fas fa-users' },
-    { name: 'Processos', href: '/processos', icon: 'fas fa-briefcase' },
-    { name: 'Audiências', href: '/audiencias', icon: 'fas fa-gavel' },
+    { name: 'Dashboard', href: '/menu/dashboard', icon: 'fas fa-chart-line' }, 
+    { name: 'Clientes', href: '/menu/clientes', icon: 'fas fa-users' },
+    { name: 'Processos', href: '/menu/processos', icon: 'fas fa-briefcase' },
+    { name: 'Audiências', href: '/menu/audiencias', icon: 'fas fa-gavel' },
 ];
 
 export function Header() {
@@ -69,13 +69,13 @@ export function Header() {
                                         <AvatarFallback className="bg-blue-600 text-white">AD</AvatarFallback>
                                     </Avatar>
                                     <div className="hidden md:block text-left">
-                                        <p className="text-sm font-medium">Dr. Advogado</p>
+                                        <p className="text-sm font-medium dark:text-white">Dr. Advogado</p>
                                         <p className="text-xs text-gray-500">adv@demo.com</p>
                                     </div>
                                     <i className="fas fa-chevron-down text-gray-400 text-xs"></i>
                                 </button>
                             </DropdownMenuTrigger>
-                            <DropdownMenuContent align="end" className="w-56 mt-2">
+                            <DropdownMenuContent align="end" className="w-56 mt-3">
                                 <DropdownMenuItem>Perfil</DropdownMenuItem>
                                 <DropdownMenuItem>Configurações</DropdownMenuItem>
                                 <DropdownMenuSeparator />

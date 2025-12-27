@@ -7,7 +7,7 @@ export const metadata: Metadata = {
 const Page = () => {
   return (
     <div className="min-h-screen flex">
-
+        olá
     </div>
   )
 }

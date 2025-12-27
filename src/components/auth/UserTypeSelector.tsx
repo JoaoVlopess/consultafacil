@@ -10,18 +10,19 @@ interface UserTypeSelectorProps {
 }
 
 const userTypes = [
+    {
+    id: 'advogado' as const,
+    label: 'Advogado',
+    icon: Briefcase,
+    description: 'Gerencie seu escritório'
+  },
   {
     id: 'cliente' as const,
     label: 'Cliente',
     icon: User,
     description: 'Acompanhe seus processos'
-  },
-  {
-    id: 'advogado' as const,
-    label: 'Advogado',
-    icon: Briefcase,
-    description: 'Gerencie seu escritório'
   }
+
 ]
 
 export function UserTypeSelector({ value, onChange }: UserTypeSelectorProps) {

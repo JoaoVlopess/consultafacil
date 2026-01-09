@@ -12,7 +12,38 @@ import {
 } from '@/src/components/dashboard';
 import { ActionButton } from '@/src/components/actionButton';
 import { ClientSearch } from '@/src/components/clientes/ClientSearch';
+import { ClientsTable } from '@/src/components/clientes/ClientsTable';
 import { useState } from 'react';
+
+export const mockClients = [
+  {
+    id: 1,
+    nome: "Maria Silva",
+    email: "maria.silva@email.com",
+    telefone: "(85) 98765-4321",
+    documento: "123.456.789-00",
+    iniciais: "MS",
+    color: "from-blue-500 to-indigo-600" // Cor azul/índigo da referência
+  },
+  {
+    id: 2,
+    nome: "João Santos",
+    email: "joao.santos@empresa.com",
+    telefone: "(85) 99123-4567",
+    documento: "987.654.321-00",
+    iniciais: "JS",
+    color: "from-purple-500 to-pink-600" // Cor roxa/rosa da referência
+  },
+  {
+    id: 3,
+    nome: "Ana Paula Oliveira",
+    email: "ana.oliveira@email.com",
+    telefone: "(85) 98888-9999",
+    documento: "456.789.123-00",
+    iniciais: "AP",
+    color: "from-green-500 to-emerald-600" // Cor verde/esmeralda da referência
+  }
+];
 
 export default function ClientsPage() {
   const { user, token } = useAuth();
@@ -73,14 +104,7 @@ export default function ClientsPage() {
         onClear={() => setSearchTerm("")}
       />
 
-      {/* Content Grid - Audiências + Atualizações */}
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">
-        <UpcomingHearings hearings={data.upcomingHearings} />
-        <RecentUpdates cases={data.recentCases} />
-      </div>
-
-      {/* Quick Actions */}
-      <QuickActions />
+      <ClientsTable clients={mockClients}/>
     </div>
   );
 }

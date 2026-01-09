@@ -11,10 +11,14 @@ import {
   QuickActions 
 } from '@/src/components/dashboard';
 import { ActionButton } from '@/src/components/actionButton';
+import { ClientSearch } from '@/src/components/clientes/ClientSearch';
+import { useState } from 'react';
 
 export default function ClientsPage() {
   const { user, token } = useAuth();
   const { data, loading, error } = useDashboard(token ?? undefined);
+
+  const [searchTerm, setSearchTerm] = useState("");
 
   // Loading state
   if (loading) {
@@ -63,7 +67,11 @@ export default function ClientsPage() {
 
 
       {/* Stats Grid - 4 Cards */}
-      <StatsGrid data={data.counts} />
+      <ClientSearch 
+        searchTerm={searchTerm} 
+        onSearchChange={setSearchTerm} 
+        onClear={() => setSearchTerm("")}
+      />
 
       {/* Content Grid - Audiências + Atualizações */}
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-6 mt-8">

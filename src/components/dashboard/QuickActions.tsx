@@ -15,7 +15,7 @@ export function QuickActions() {
         {actions.map((action, index) => (
           <button
             key={index}
-            className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg p-4 text-center transition-all"
+            className="bg-white bg-opacity-20 hover:bg-opacity-30 rounded-lg p-4 text-center transition-all text-black"
           >
             <i className={`fas ${action.icon} text-3xl mb-2`}></i>
             <p className="text-sm font-medium">{action.label}</p>

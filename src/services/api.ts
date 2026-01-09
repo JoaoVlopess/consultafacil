@@ -1,33 +1,34 @@
-// const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
+// src/services/api.ts
 
-// interface FetchOptions extends RequestInit {
-//   token?: string;
-// }
+const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || 'http://localhost:3000';
 
-// export async function fetchAPI<T>(
-//   endpoint: string,
-//   options: FetchOptions = {}
-// ): Promise<T> {
-//   const { token, ...fetchOptions } = options;
+interface FetchOptions extends RequestInit {
+  token?: string;
+}
 
-//   const headers: HeadersInit = {
-//     'Content-Type': 'application/json',
-//     ...fetchOptions.headers,
-//   };
+export async function fetchAPI<T>(
+  endpoint: string,
+  options: FetchOptions = {}
+): Promise<T> {
+  const { token, ...fetchOptions } = options;
 
-//   // Adiciona o token JWT se existir
-//   if (token) {
-//     headers['Authorization'] = `Bearer ${token}`;
-//   }
+  const headers = new Headers(fetchOptions.headers);
 
-//   const response = await fetch(`${API_BASE_URL}${endpoint}`, {
-//     ...fetchOptions,
-//     headers,
-//   });
+  headers.set('Content-Type', 'application/json');
 
-//   if (!response.ok) {
-//     throw new Error(`API Error: ${response.status} ${response.statusText}`);
-//   }
+  if (token) {
+    headers.set('Authorization', `Bearer ${token}`);
+  }
 
-//   return response.json();
-// }
+  const response = await fetch(`${API_BASE_URL}${endpoint}`, {
+    ...fetchOptions,
+    headers,
+  });
+
+  if (!response.ok) {
+    const error = await response.json().catch(() => ({}));
+    throw new Error(error.message || `API Error: ${response.status}`);
+  }
+
+  return response.json();
+}

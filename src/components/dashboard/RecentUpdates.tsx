@@ -2,7 +2,7 @@
 
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';
-import type { Processo, ProcessoStatus } from '@/types/dashboard';
+import type { Processo, ProcessoStatus } from '@/src/types/dashboard';
 
 interface RecentUpdatesProps {
   cases: Processo[];

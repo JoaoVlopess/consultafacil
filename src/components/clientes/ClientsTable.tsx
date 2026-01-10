@@ -16,13 +16,20 @@ import {
   DropdownMenuItem,
   DropdownMenuTrigger,
 } from "@/src/components/ui/dropdown-menu";
+import { PaginationFooter } from "./PaginationFooter";
 
 
 interface ClientTableProps {
-  clients: Client[];
+  clients: any[];
+  pagination: {
+    totalResults: number;
+    currentPage: number;
+    itemsPerPage: number;
+    onPageChange: (page: number) => void;
+  }
 }
 
-export function ClientsTable({ clients }: ClientTableProps) {
+export function ClientsTable({ clients, pagination }: ClientTableProps) {
   return (
     <div className="bg-white rounded-lg shadow-sm border border-gray-200 overflow-hidden">
       <Table>
@@ -77,7 +84,12 @@ export function ClientsTable({ clients }: ClientTableProps) {
       </Table>
 
       {/* Paginação */}
-      {/* <PaginationFooter totalResults={12} currentPage={2} /> */}
+       <PaginationFooter 
+        totalResults={pagination.totalResults}
+        currentPage={pagination.currentPage}
+        itemsPerPage={pagination.itemsPerPage}
+        onPageChange={pagination.onPageChange}
+      />
     </div>
   );
 }

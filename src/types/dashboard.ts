@@ -29,7 +29,6 @@ export interface Processo {
   lastUpdateAt?: string;
   created_at: string;
   updated_at: string;
-  // ... outros campos que você tem
 }
 
 export enum ProcessoStatus {

@@ -15,6 +15,7 @@ import { ClientSearch } from '@/src/components/clientes/ClientSearch';
 import { ClientsTable } from '@/src/components/clientes/ClientsTable';
 import { useState } from 'react';
 import { StatsGridCli } from '@/src/components/clientes/StatsGridCli';
+import { HeaderForPage } from '@/src/components/HeaderForPage';
 
 export const mockClients = [
   { id: 1, nome: "Maria Silva", email: "maria.silva@email.com", telefone: "(85) 98765-4321", documento: "123.456.789-00", iniciais: "MS", color: "from-blue-500 to-indigo-600" },
@@ -94,14 +95,7 @@ const filteredData = mockClients.filter((client) => {
   return (
     <div className="max-w-7xl space-y-6 mx-auto px-4 sm:px-6 lg:px-8 py-8">
   {/* Lado Esquerdo: Título e Subtítulo */}
-  <div className="flex items-center justify-between mb-8">
-    <div >
-      <h1 className="text-3xl font-bold text-gray-900">Clientes</h1>
-      <p className="text-gray-600 mt-1">Gerencie os clientes do seu escritório</p>
-    </div>
-    <ActionButton label="Novo Cliente" onClick={() => console.log('Abrir Modal')} />
-  </div>
-
+    <HeaderForPage title={'Clientes'} subtitle={'Gerencie os clientes do seu escritório'} button= {true} buttonLabel={'Novo Cliente'}/>
 
       {/* Stats Grid - 4 Cards */}
       <ClientSearch 

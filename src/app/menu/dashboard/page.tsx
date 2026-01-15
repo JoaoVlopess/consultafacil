@@ -10,6 +10,7 @@ import {
   RecentUpdates, 
   QuickActions 
 } from '@/src/components/dashboard';
+import { HeaderForPage } from '@/src/components/HeaderForPage';
 
 export default function DashboardPage() {
   const { user, token } = useAuth();
@@ -52,14 +53,8 @@ export default function DashboardPage() {
   return (
     <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
       {/* Welcome Section */}
-      <div className="mb-8">
-        <h2 className="text-2xl font-bold text-gray-900">
-          Bem-vindo de volta, {user?.nome || 'Advogado'}!
-        </h2>
-        <p className="text-gray-600 mt-1">
-          Aqui está um resumo das suas atividades jurídicas
-        </p>
-      </div>
+      <HeaderForPage title={`Bem-vindo de volta, ${user?.nome || 'Advogado'}!`} subtitle={' Aqui está um resumo das suas atividades jurídicas'}  button= {false}/>
+
 
       {/* Stats Grid - 4 Cards */}
       <StatsGrid data={data.counts} />

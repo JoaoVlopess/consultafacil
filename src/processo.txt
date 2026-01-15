@@ -1,0 +1,350 @@
+1️⃣ PÁGINA PRINCIPAL
+app/(dashboard)/processos/page.tsx
+Função: Página principal que orquestra todos os componentes
+Responsabilidades:
+
+Gerenciar estado (filtros, paginação, modal aberto/fechado)
+Chamar o hook useProcesses para buscar dados
+Renderizar todos os componentes filhos
+Controlar abertura/fechamento do modal de formulário
+Passar dados (props) para os componentes
+
+Não faz:
+
+Não tem lógica de negócio
+Não faz chamadas diretas à API
+Não tem HTML/CSS complexo
+
+
+2️⃣ COMPONENTES (Pasta components/processos/)
+
+ProcessesHeader.tsx
+Função: Cabeçalho da página
+O que renderiza:
+
+Título: "Processos"
+Subtítulo: "Acompanhe todos os processos do escritório"
+Botão: "Novo Processo" (com gradiente azul)
+
+Props que recebe:
+typescript{
+  onNewProcess: () => void  // Callback para abrir modal
+}
+Responsabilidades:
+
+Apenas apresentação visual
+Dispara evento de clique no botão
+
+
+ProcessesStats.tsx
+Função: Grid com 4 cards de estatísticas
+O que renderiza:
+
+Card 1: Em Andamento (azul)
+Card 2: Ganhos (verde)
+Card 3: Arquivados (cinza)
+Card 4: Total (roxo)
+
+Props que recebe:
+typescript{
+  stats: {
+    emAndamento: number;
+    ganhos: number;
+    arquivados: number;
+    total: number;
+  }
+}
+Responsabilidades:
+
+Exibir os números de cada categoria
+Estilização com cores específicas
+Grid responsivo (4 cols → 2 cols → 1 col)
+
+
+ProcessesFilters.tsx
+Função: Barra de filtros e busca
+O que renderiza:
+
+Input de busca (número ou título do processo)
+Select de Status (Todos, Em Andamento, Ganho, Perdido, Arquivado)
+Select de Cliente
+Botão "Limpar Filtros"
+
+Props que recebe:
+typescript{
+  searchTerm: string;
+  selectedStatus: string;
+  selectedClient: string;
+  onSearchChange: (value: string) => void;
+  onStatusChange: (status: string) => void;
+  onClientChange: (clientId: string) => void;
+  onClearFilters: () => void;
+  clients: Client[];  // Lista de clientes para o select
+}
+Responsabilidades:
+
+Controlar inputs de filtro
+Disparar callbacks quando valores mudam
+Mostrar/esconder botão "Limpar" baseado em filtros ativos
+
+
+ProcessCard.tsx
+Função: Card individual de um processo
+O que renderiza:
+
+Badge de status (colorido)
+Timestamp de última atualização
+Título do processo
+Número do processo (formato CNJ)
+Cliente
+Fórum/Vara
+Próxima audiência (se houver)
+Botão de ações (três pontinhos)
+
+Props que recebe:
+typescript{
+  process: Process;              // Dados do processo
+  onEdit: (process: Process) => void;
+  onDelete: (id: number) => void;
+}
+Responsabilidades:
+
+Exibir todos os dados visualmente
+Aplicar cor correta ao badge de status
+Formatar timestamp ("há 2 horas")
+Destacar audiências próximas em laranja
+Menu dropdown com opções (Editar/Excluir)
+
+
+ProcessesList.tsx
+Função: Lista todos os cards de processos + paginação
+O que renderiza:
+
+Loop de ProcessCard para cada processo
+Estado vazio ("Nenhum processo encontrado")
+Loading state (spinner)
+Componente de paginação no rodapé
+
+Props que recebe:
+typescript{
+  processes: Process[];
+  loading: boolean;
+  onEdit: (process: Process) => void;
+  onDelete: (id: number) => void;
+  onRefetch: () => void;
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+}
+Responsabilidades:
+
+Mapear array de processos para cards
+Exibir loading quando necessário
+Exibir mensagem quando lista vazia
+Controlar paginação
+
+
+ProcessForm.tsx
+Função: Formulário para criar/editar processo (usado no modal)
+O que renderiza:
+
+Todos os campos do formulário:
+
+Número do Processo (CNJ)
+Título
+Cliente (select)
+Fórum/Vara
+Status (radio buttons)
+Valor da Causa
+Data de Distribuição
+Parte Contrária
+Descrição
+Observações
+
+
+Botões: Cancelar e Salvar
+
+Props que recebe:
+typescript{
+  process: Process | null;     // null = novo, object = edição
+  onSuccess: () => void;        // Callback após salvar
+  onCancel: () => void;         // Callback ao cancelar
+}
+Responsabilidades:
+
+Controlar estado do formulário
+Validar campos
+Chamar service para criar/atualizar
+Exibir loading durante submit
+Mostrar toasts de sucesso/erro
+
+
+index.ts
+Função: Centralizar exports
+Conteúdo:
+typescriptexport { ProcessesHeader } from './ProcessesHeader';
+export { ProcessesStats } from './ProcessesStats';
+export { ProcessesFilters } from './ProcessesFilters';
+export { ProcessCard } from './ProcessCard';
+export { ProcessesList } from './ProcessesList';
+export { ProcessForm } from './ProcessForm';
+Responsabilidades:
+
+Facilitar imports na página principal
+
+
+3️⃣ HOOK CUSTOMIZADO
+hooks/useProcesses.ts
+Função: Buscar processos da API com filtros
+O que faz:
+
+Chama ProcessesService.getAll() com parâmetros
+Gerencia estado (data, loading, error)
+Implementa debounce na busca (300ms)
+Recarrega quando filtros mudam
+Fornece função refetch() para atualizar
+
+Retorna:
+typescript{
+  data: ProcessesResponse | null;
+  loading: boolean;
+  error: string | null;
+  refetch: () => Promise<void>;
+}
+Parâmetros:
+typescript{
+  token: string | null;
+  search?: string;
+  status?: string;
+  clientId?: string;
+  page?: number;
+  limit?: number;
+}
+Responsabilidades:
+
+Gerenciar estado de loading/error
+Fazer requisição HTTP
+Implementar debounce
+Atualizar quando dependências mudam
+
+
+4️⃣ SERVICE (API)
+services/processes.service.ts
+Função: Comunicação com o backend
+Métodos:
+
+getAll(params, token) → Lista processos com filtros
+create(data, token) → Cria novo processo
+update(id, data, token) → Atualiza processo
+delete(id, token) → Exclui processo
+
+Responsabilidades:
+
+Montar query params
+Fazer requisições HTTP (GET, POST, PATCH, DELETE)
+Tratar erros da API
+Retornar dados tipados
+
+Não faz:
+
+Não gerencia estado React
+Não exibe toasts/alertas
+Não manipula DOM
+
+
+5️⃣ TYPES/INTERFACES
+types/process.ts
+Função: Definir tipos TypeScript
+O que contém:
+typescript// Interface do processo (baseado no backend)
+export interface Process {
+  id: number;
+  numero: string;
+  titulo: string;
+  forum?: string;
+  status: ProcessoStatus;
+  clientId: number;
+  cliente?: Client;        // Relação
+  lawyerId: number;
+  lastUpdateAt?: string;
+  created_at: string;
+  updated_at: string;
+}
+
+// Enum de status
+export enum ProcessoStatus {
+  EM_ANDAMENTO = 'EM_ANDAMENTO',
+  ARQUIVADO = 'ARQUIVADO',
+  GANHO = 'GANHO',
+  PERDIDO = 'PERDIDO',
+}
+
+// Dados do formulário
+export interface ProcessFormData {
+  numero: string;
+  titulo: string;
+  forum?: string;
+  status: ProcessoStatus;
+  clientId: number;
+  // ... outros campos
+}
+
+// Resposta da API
+export interface ProcessesResponse {
+  items: Process[];
+  total: number;
+  page: number;
+  limit: number;
+  totalPages: number;
+}
+
+// Props para stats
+export interface ProcessStats {
+  emAndamento: number;
+  ganhos: number;
+  arquivados: number;
+  total: number;
+}
+```
+
+**Responsabilidades:**
+- Garantir type safety
+- Documentar estrutura de dados
+- Facilitar autocompletar no VS Code
+
+---
+
+## 🔄 **FLUXO DE DADOS**
+```
+1. Usuário abre /processos
+   ↓
+2. page.tsx carrega
+   ↓
+3. useProcesses() busca dados da API
+   ↓
+4. ProcessesService.getAll() faz requisição
+   ↓
+5. Backend retorna dados
+   ↓
+6. Hook atualiza estado
+   ↓
+7. page.tsx renderiza componentes com dados
+   ↓
+8. Componentes exibem visualmente
+
+📝 ORDEM DE CRIAÇÃO RECOMENDADA
+
+Types (types/process.ts) → Base de tudo
+Service (services/processes.service.ts) → Comunicação
+Hook (hooks/useProcesses.ts) → Lógica de estado
+Componentes simples (Header, Stats) → UI básica
+Componentes complexos (Card, Filters) → UI detalhada
+Form → Criação/edição
+Lista → Junta tudo
+Página → Orquestra tudo
+
+
+✅ RESUMO DAS RESPONSABILIDADES
+ArquivoResponsabilidadepage.tsxOrquestração e estado globalHeaderTítulo + botãoStats4 cards de númerosFiltersBusca + filtrosCardExibir 1 processoListListar N processos + paginaçãoFormCriar/editar processoHookBuscar dados da APIServiceRequisições HTTPTypesTipos TypeScript
+
+Agora você tem o mapa completo! Por onde quer começar? Sugiro começar pelos types e depois o service! 🚀

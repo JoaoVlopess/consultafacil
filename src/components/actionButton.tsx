@@ -3,7 +3,7 @@ import { Plus } from "lucide-react";
 import { Button } from "./ui/button"; // Se estiver usando shadcn/ui
 
 interface ActionButtonProps {
-  label: string;
+  label: string| undefined;
   onClick?: () => void;
 }
 

@@ -1,44 +1,51 @@
-//  # Hook para buscar processos
 // src/hooks/useProcessos.ts
 'use client';
 
 import { useState, useEffect, useCallback } from 'react';
 import { ProcessoService } from '@/src/services/processes.service';
-import type { ProcessoListResponse, ProcessoFilters } from '@/src/types/process';
+import { 
+  ProcessesResponse, 
+  ProcessQueryParams, 
+  ProcessoStatus 
+} from '@/src/types/process';
 
 interface UseProcessosParams {
   token: string | null;
   search?: string;
-  status?: string;
-  client_id?: string;
+  status?: ProcessoStatus;      // ✅ Pode ser undefined
+  client_id?: number;           // ✅ Pode ser undefined
   page?: number;
   limit?: number;
 }
 
 interface UseProcessosReturn {
-  data: ProcessoListResponse | null;
+  data: ProcessesResponse | null;
   loading: boolean;
   error: string | null;
   refetch: () => Promise<void>;
 }
 
-// Mock data para desenvolvimento/testes
-const mockData: ProcessoListResponse = {
+// ✅ Mock data atualizado
+const mockData: ProcessesResponse = {
   data: [
     {
       id: 1,
       numeroProcesso: '0001234-56.2024.8.26.0100',
       titulo: 'Ação de Cobrança',
       forum: '1ª Vara Cível',
-      status: 'EM_ANDAMENTO',
+      status: ProcessoStatus.EM_ANDAMENTO,
       client_id: 1,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
+      user_id: 1,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
       lastUpdateAt: new Date().toISOString(),
-      client: {
+      cliente: {
         id: 1,
         nome: 'João Silva',
-        email: 'joao@email.com'
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
       }
     },
     {
@@ -46,66 +53,133 @@ const mockData: ProcessoListResponse = {
       numeroProcesso: '0005678-90.2024.8.26.0200',
       titulo: 'Ação Trabalhista',
       forum: '2ª Vara do Trabalho',
-      status: 'PENDENTE',
+      status: ProcessoStatus.PENDENTE,
       client_id: 2,
-      createdAt: new Date().toISOString(),
-      updatedAt: new Date().toISOString(),
-      client: {
+      user_id: 1,
+      created_at: new Date().toISOString(),
+      updated_at: new Date().toISOString(),
+      cliente: {
         id: 2,
         nome: 'Maria Santos',
-        email: 'maria@email.com'
+        email: 'maria@email.com',
+        telefone: '(11) 99876-5432',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
       }
-    }
+    },
+    {
+      id: 3,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(), // 5 dias atrás
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(), // 2 dias atrás
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },
   ],
   pagination: {
     currentPage: 1,
     totalPages: 1,
-    totalItems: 2,
+    totalItems: 3,
     itemsPerPage: 10
   }
 };
 
 export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
-  const [data, setData] = useState<ProcessoListResponse | null>(null);
+  const [data, setData] = useState<ProcessesResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
 
+  // ✅ Extrair params
+  const { token, search, status, client_id, page, limit } = params;
+
   // Função para buscar os dados
   const fetchData = useCallback(async () => {
-    const { token, search, status, client_id, page, limit } = params;
-
-    // Se não houver token, usamos o mock e encerramos a função
+    // ✅ Se não houver token, usa mock
     if (!token) {
-      setData(mockData);
+      console.log('🔵 Usando dados MOCK (sem token)');
+      
+      // ✅ Aplicar filtros no mock
+      let filteredData = [...mockData.data];
+      
+      if (search) {
+        const searchLower = search.toLowerCase();
+        filteredData = filteredData.filter(p => 
+          p.numeroProcesso.toLowerCase().includes(searchLower) ||
+          p.titulo.toLowerCase().includes(searchLower)
+        );
+      }
+      
+      if (status) {
+        filteredData = filteredData.filter(p => p.status === status);
+      }
+      
+      if (client_id) {
+        filteredData = filteredData.filter(p => p.client_id === client_id);
+      }
+
+      setData({
+        ...mockData,
+        data: filteredData,
+        pagination: {
+          ...mockData.pagination,
+          totalItems: filteredData.length,
+        }
+      });
       setLoading(false);
       setError(null);
       return;
     }
 
+    // ✅ Com token, faz requisição real
     try {
       setLoading(true);
       setError(null);
 
+      console.log('🟢 Buscando processos da API com filtros:', {
+        search,
+        status,
+        client_id,
+        page,
+        limit,
+      });
+
       // Montar filtros
-      const filters: ProcessoFilters = {};
+      const filters: ProcessQueryParams = {};
       
       if (search) filters.search = search;
-      if (status) filters.status = status as any;
-      if (client_id) filters.client_id = parseInt(client_id);
+      if (status) filters.status = status;
+      if (client_id) filters.client_id = client_id;
       if (page) filters.page = page;
       if (limit) filters.limit = limit;
 
       const result = await ProcessoService.findAll(filters);
+      
+      console.log('✅ Processos carregados:', result.data.length);
       setData(result);
+      
     } catch (err) {
-      setError(err instanceof Error ? err.message : 'Erro ao carregar processos');
+      const errorMessage = err instanceof Error ? err.message : 'Erro ao carregar processos';
+      console.error('❌ Erro ao buscar processos:', err);
+      setError(errorMessage);
       setData(null);
     } finally {
       setLoading(false);
     }
-  }, [params.token, params.search, params.status, params.client_id, params.page, params.limit]);
+  }, [token, search, status, client_id, page, limit]);
 
-  // Debounce para busca (300ms)
+  // ✅ Debounce para busca (300ms)
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       fetchData();

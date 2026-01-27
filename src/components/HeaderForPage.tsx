@@ -5,6 +5,8 @@ type HeaderForPageProps = {
     subtitle: string;
     button: boolean;
     buttonLabel?: string;
+    onButtonClick?: () => void;
+    
 }
 
 export const HeaderForPage = ({title, subtitle, button, buttonLabel}: HeaderForPageProps) => {

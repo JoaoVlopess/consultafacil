@@ -95,7 +95,13 @@ const filteredData = mockClients.filter((client) => {
   return (
     <div className="max-w-7xl space-y-6 mx-auto px-4 sm:px-6 lg:px-8 py-8">
   {/* Lado Esquerdo: Título e Subtítulo */}
-    <HeaderForPage title={'Clientes'} subtitle={'Gerencie os clientes do seu escritório'} button= {true} buttonLabel={'Novo Cliente'}/>
+    <HeaderForPage 
+    title={'Clientes'} 
+    subtitle={'Gerencie os clientes do seu escritório'} 
+    button= {true}
+    buttonLabel={'Novo Cliente'}
+    // onButtonClick={handleNewClient}
+     />
 
       {/* Stats Grid - 4 Cards */}
       <ClientSearch 

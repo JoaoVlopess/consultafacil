@@ -1,17 +1,16 @@
 // src/services/processo.service.ts
 import { fetchAPI } from './api';
 import type { 
-  ProcessoFormData,
-  ProcessoFilters,
-  ProcessoListResponse,
-  Processo,
-  ProcessoWithClient
+  ProcessFormData,
+  ProcessQueryParams,
+  ProcessesResponse,
+  Process,
 } from '@/src/types/process';
 
 // Interfaces para respostas da API
 interface ProcessoResponse {
   success: boolean;
-  data: Processo;
+  data: Process;
   message?: string;
 }
 
@@ -25,7 +24,7 @@ export class ProcessoService {
   /**
    * Criar novo processo - POST /processos
    */
-  static async create(processoData: ProcessoFormData): Promise<ProcessoResponse> {
+  static async create(processoData: ProcessFormData): Promise<ProcessoResponse> {
     return fetchAPI<ProcessoResponse>('/processos', {
       method: 'POST',
       body: JSON.stringify(processoData),
@@ -35,7 +34,7 @@ export class ProcessoService {
   /**
    * Listar processos com filtros - GET /processos
    */
-  static async findAll(filters?: ProcessoFilters): Promise<ProcessoListResponse> {
+  static async findAll(filters?: ProcessQueryParams): Promise<ProcessesResponse> {
     const searchParams = new URLSearchParams();
     
     if (filters) {
@@ -49,7 +48,7 @@ export class ProcessoService {
     const queryString = searchParams.toString();
     const url = queryString ? `/processos?${queryString}` : '/processos';
 
-    return fetchAPI<ProcessoListResponse>(url, {
+    return fetchAPI<ProcessesResponse>(url, {
       method: 'GET',
     });
   }
@@ -66,7 +65,7 @@ export class ProcessoService {
   /**
    * Atualizar processo - PATCH /processos/:id
    */
-  static async update(id: number, updateData: Partial<ProcessoFormData>): Promise<ProcessoResponse> {
+  static async update(id: number, updateData: Partial<ProcessFormData>): Promise<ProcessoResponse> {
     return fetchAPI<ProcessoResponse>(`/processos/${id}`, {
       method: 'PATCH',
       body: JSON.stringify(updateData),
@@ -85,8 +84,8 @@ export class ProcessoService {
   /**
    * Buscar processos por cliente - GET /processos/cliente/:clienteId
    */
-  static async findByCliente(clienteId: number): Promise<ProcessoListResponse> {
-    return fetchAPI<ProcessoListResponse>(`/processos/cliente/${clienteId}`, {
+  static async findByCliente(clienteId: number): Promise<ProcessesResponse> {
+    return fetchAPI<ProcessesResponse>(`/processos/cliente/${clienteId}`, {
       method: 'GET',
     });
   }
@@ -94,21 +93,21 @@ export class ProcessoService {
   /**
    * Buscar processos por status
    */
-  static async findByStatus(status: string): Promise<ProcessoListResponse> {
+  static async findByStatus(status: string): Promise<ProcessesResponse> {
     return this.findAll({ status: status as any });
   }
 
   /**
    * Buscar processos com paginação simples
    */
-  static async findPaginated(page: number = 1, limit: number = 10): Promise<ProcessoListResponse> {
+  static async findPaginated(page: number = 1, limit: number = 10): Promise<ProcessesResponse> {
     return this.findAll({ page, limit });
   }
 
   /**
    * Buscar processos por termo de busca
    */
-  static async search(searchTerm: string, page: number = 1): Promise<ProcessoListResponse> {
+  static async search(searchTerm: string, page: number = 1): Promise<ProcessesResponse> {
     return this.findAll({ 
       search: searchTerm, 
       page,
@@ -122,12 +121,12 @@ export class ProcessoService {
   static async getStats(): Promise<{
     total: number;
     porStatus: Record<string, number>;
-    recentes: ProcessoWithClient[];
+    recentes: Process[];
   }> {
     return fetchAPI<{
       total: number;
       porStatus: Record<string, number>;
-      recentes: ProcessoWithClient[];
+      recentes: Process[];
     }>('/processos/stats', {
       method: 'GET',
     });

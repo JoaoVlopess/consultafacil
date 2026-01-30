@@ -12,8 +12,8 @@ import {
 interface UseProcessosParams {
   token: string | null;
   search?: string;
-  status?: ProcessoStatus;      // ✅ Pode ser undefined
-  client_id?: number;           // ✅ Pode ser undefined
+  status?: ProcessoStatus;      
+  client_id?: number;          
   page?: number;
   limit?: number;
 }
@@ -27,7 +27,7 @@ interface UseProcessosReturn {
 
 // ✅ Mock data atualizado
 const mockData: ProcessesResponse = {
-  data: [
+items: [
     {
       id: 1,
       numeroProcesso: '0001234-56.2024.8.26.0100',
@@ -39,11 +39,14 @@ const mockData: ProcessesResponse = {
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       lastUpdateAt: new Date().toISOString(),
-      cliente: {
+      client: {
         id: 1,
         nome: 'João Silva',
         email: 'joao@email.com',
         telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       }
@@ -58,11 +61,15 @@ const mockData: ProcessesResponse = {
       user_id: 1,
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
-      cliente: {
+      lastUpdateAt: new Date().toISOString(),
+      client: {
         id: 2,
         nome: 'Maria Santos',
         email: 'maria@email.com',
         telefone: '(11) 99876-5432',
+        documento: '987.654.321-11',
+        iniciais: 'MS',
+        color: '#EC4899',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       }
@@ -75,25 +82,26 @@ const mockData: ProcessesResponse = {
       status: ProcessoStatus.GANHO,
       client_id: 1,
       user_id: 1,
-      created_at: new Date(Date.now() - 86400000 * 5).toISOString(), // 5 dias atrás
-      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(), // 2 dias atrás
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
       lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-      cliente: {
+      client: {
         id: 1,
         nome: 'João Silva',
         email: 'joao@email.com',
         telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
         created_at: new Date().toISOString(),
         updated_at: new Date().toISOString(),
       }
     },
   ],
-  pagination: {
-    currentPage: 1,
-    totalPages: 1,
-    totalItems: 3,
-    itemsPerPage: 10
-  }
+  total: 3,
+  page: 1,
+  limit: 10,
+  totalPages: 1
 };
 
 export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
@@ -111,31 +119,30 @@ export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
       console.log('🔵 Usando dados MOCK (sem token)');
       
       // ✅ Aplicar filtros no mock
-      let filteredData = [...mockData.data];
+      let filteredItems = [...mockData.items];
       
       if (search) {
         const searchLower = search.toLowerCase();
-        filteredData = filteredData.filter(p => 
+        filteredItems = filteredItems.filter(p => 
           p.numeroProcesso.toLowerCase().includes(searchLower) ||
           p.titulo.toLowerCase().includes(searchLower)
         );
       }
       
       if (status) {
-        filteredData = filteredData.filter(p => p.status === status);
+        filteredItems = filteredItems.filter(p => p.status === status);
       }
       
       if (client_id) {
-        filteredData = filteredData.filter(p => p.client_id === client_id);
+        filteredItems = filteredItems.filter(p => p.client_id === client_id);
       }
 
       setData({
-        ...mockData,
-        data: filteredData,
-        pagination: {
-          ...mockData.pagination,
-          totalItems: filteredData.length,
-        }
+        items: filteredItems, 
+        total: filteredItems.length,
+        page: page || 1,
+        limit: limit || 10,
+        totalPages: Math.ceil(filteredItems.length / (limit || 10)),
       });
       setLoading(false);
       setError(null);
@@ -166,7 +173,7 @@ export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
 
       const result = await ProcessoService.findAll(filters);
       
-      console.log('✅ Processos carregados:', result.data.length);
+      console.log('✅ Processos carregados:', result.items.length);
       setData(result);
       
     } catch (err) {

@@ -41,7 +41,7 @@ export interface Process {
   deleted_at?: string | null;      // ISO date string ou null
   
   // Relações (quando incluídas no backend)
-  cliente?: Client;                // Relação com cliente
+  client?: Client;                // Relação com cliente
   audiencias?: Hearing[];          // Relação com audiências
 }
 
@@ -88,11 +88,11 @@ export interface ProcessQueryParams {
  * Estrutura típica retornada pelo backend
  */
 export interface ProcessesResponse {
-  items: Process[];                // Lista de processos
-  total: number;                   // Total de registros
-  page: number;                    // Página atual
-  limit: number;                   // Itens por página
-  totalPages: number;              // Total de páginas
+  items: Process[];         
+  total: number;         
+  page: number;          
+  limit: number;           
+  totalPages: number;      
 }
 
 /**

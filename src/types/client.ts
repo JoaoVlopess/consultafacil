@@ -6,4 +6,6 @@ interface Client {
   documento: string;
   iniciais: string;
   color: string;
+  created_at: String;
+  updated_at?: String;
 }

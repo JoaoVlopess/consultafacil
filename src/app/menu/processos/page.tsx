@@ -43,10 +43,10 @@ export default function ProcessosPage() {
 
   // Calcular estatísticas
   const stats = {
-    emAndamento: data?.data.filter(p => p.status === ProcessoStatus.EM_ANDAMENTO).length || 0,
-    ganhos: data?.data.filter(p => p.status === ProcessoStatus.GANHO).length || 0,
-    arquivados: data?.data.filter(p => p.status === ProcessoStatus.ARQUIVADO).length || 0,
-    total: data?.pagination.totalItems || 0,
+    emAndamento: data?.items.filter(p => p.status === ProcessoStatus.EM_ANDAMENTO).length || 0,
+    ganhos: data?.items.filter(p => p.status === ProcessoStatus.GANHO).length || 0,
+    arquivados: data?.items.filter(p => p.status === ProcessoStatus.ARQUIVADO).length || 0,
+    total: data?.total || 0,
   };
 
   // Handlers
@@ -140,7 +140,7 @@ export default function ProcessosPage() {
 
       {/* Lista de Processos em Cards */}
       <div className="space-y-4">
-        {!data || data.data.length === 0 ? (
+        {!data || data.items.length === 0 ? (
           <div className="bg-white rounded-lg shadow-sm border border-gray-200 p-12 text-center">
             <i className="fas fa-briefcase text-6xl text-gray-300 mb-4"></i>
             <h3 className="text-lg font-semibold text-gray-900 mb-2">
@@ -155,7 +155,7 @@ export default function ProcessosPage() {
           </div>
         ) : (
           <>
-            {data.data.map((processo) => (
+            {data.items.map((processo) => (
               <ProcessCard
                 key={processo.id}
                 process={processo}
@@ -168,12 +168,12 @@ export default function ProcessosPage() {
       </div>
 
       {/* Paginação */}
-      {data?.pagination && data.pagination.totalPages > 1 && (
+      {data && data.totalPages > 1 && (
         <div className="bg-white rounded-lg shadow-sm border border-gray-200 px-6 py-4 mt-6 flex items-center justify-between">
           <p className="text-sm text-gray-700">
             Mostrando <span className="font-medium">{((currentPage - 1) * 10) + 1}</span> a{' '}
-            <span className="font-medium">{Math.min(currentPage * 10, data.pagination.totalItems)}</span> de{' '}
-            <span className="font-medium">{data.pagination.totalItems}</span> processos
+            <span className="font-medium">{Math.min(currentPage * 10, data.total)}</span> de{' '}
+            <span className="font-medium">{data.total}</span> processos
           </p>
           <div className="flex gap-2">
             <button
@@ -186,7 +186,7 @@ export default function ProcessosPage() {
             </button>
             
             <button
-              disabled={currentPage === data.pagination.totalPages}
+              disabled={currentPage === data.totalPages}
               onClick={() => setCurrentPage(currentPage + 1)}
               className="px-4 py-2 border border-gray-300 rounded-lg text-sm font-medium text-gray-700 hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >

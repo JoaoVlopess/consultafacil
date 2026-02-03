@@ -67,7 +67,7 @@ export function ProcessCard({ process, onEdit, onDelete }: ProcessCardProps) {
             {/* Cliente */}
             <div className="flex items-center text-gray-600">
               <i className="fas fa-user mr-2 text-gray-400"></i>
-              <span>{process.client?.nome || 'Cliente não informado'}</span>
+              <span>{process.cliente?.nome || 'Cliente não informado'}</span>
             </div>
 
             {/* Fórum/Vara */}

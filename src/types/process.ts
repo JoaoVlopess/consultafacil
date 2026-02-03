@@ -4,11 +4,7 @@
 import { Hearing } from "./audiencia";
 import { Cliente } from "./client";
 
-/**
- * ===============================================
- * ENUMS - Mesmo do backend
- * ===============================================
- */
+
 
 export enum ProcessoStatus {
   PENDENTE = 'PENDENTE',
@@ -18,16 +14,6 @@ export enum ProcessoStatus {
   PERDIDO = 'PERDIDO',
 }
 
-/**
- * ===============================================
- * INTERFACES PRINCIPAIS
- * ===============================================
- */
-
-/**
- * Interface do Processo (entidade completa retornada pelo backend)
- * Baseado na entidade Processo do NestJS
- */
 export interface Process {
   id: number;
   numeroProcesso: string;
@@ -36,20 +22,17 @@ export interface Process {
   status: ProcessoStatus;
   client_id: number;
   user_id: number;
-  lastUpdateAt?: string;          // ISO date string
-  created_at: string;              // ISO date string
-  updated_at: string;              // ISO date string
-  deleted_at?: string | null;      // ISO date string ou null
+  lastUpdateAt?: string;          
+  created_at: string;              
+  updated_at: string;              
+  deleted_at?: string | null;      
   
-  // Relações (quando incluídas no backend)
-  client?: Cliente;                // Relação com cliente
-  audiencias?: Hearing[];          // Relação com audiências
+
+  cliente?: Cliente;              
+  audiencias?: Hearing[];         
 }
 
-/**
- * DTO para criar processo (CreateProcessoDto do backend)
- * Usado ao fazer POST /processos
- */
+
 export interface CreateProcessDto {
   numeroProcesso: string;          // Obrigatório
   titulo: string;                  // Obrigatório
@@ -147,15 +130,6 @@ export interface ProcessFormProps {
   onCancel: () => void;
 }
 
-/**
- * ===============================================
- * HELPER TYPES
- * ===============================================
- */
-
-/**
- * Tipo para mapeamento de cores por status
- */
 export type StatusColorMap = {
   [key in ProcessoStatus]: {
     badge: string;                 // Classes Tailwind para badge
@@ -212,22 +186,12 @@ export const STATUS_CONFIG: StatusColorMap = {
   },
 };
 
-/**
- * ===============================================
- * TYPE GUARDS (Validações de tipo em runtime)
- * ===============================================
- */
 
-/**
- * Verifica se um status é válido
- */
 export function isValidStatus(status: string): status is ProcessoStatus {
   return Object.values(ProcessoStatus).includes(status as ProcessoStatus);
 }
 
-/**
- * Verifica se um processo tem audiências agendadas
- */
+
 export function hasUpcomingHearings(process: Process): boolean {
   if (!process.audiencias || process.audiencias.length === 0) {
     return false;
@@ -239,19 +203,4 @@ export function hasUpcomingHearings(process: Process): boolean {
   );
 }
 
-/**
- * ===============================================
- * IMPORTS DE TIPOS RELACIONADOS
- * ===============================================
- */
-
-/**
- * Interface de Cliente (relação)
- * Importar do arquivo de types de cliente
-
-
-/**
- * Interface de Audiência (relação)
- * Importar do arquivo de types de audiência
- */
 

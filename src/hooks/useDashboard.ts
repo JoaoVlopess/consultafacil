@@ -14,8 +14,8 @@ interface UseDashboardReturn {
 const mockData = {
   counts: { activeCases: 12, hearingsNext7Days: 4 },
   upcomingHearings: [
-    { id: 1, data: new Date().toISOString(), processo: { numero: '00123-SP' } },
-    { id: 2, data: new Date().toISOString(), processo: { numero: '00124-SP' } },
+    { id: 1, data: new Date().toISOString(), processo: { numeroProcesso: '00123-SP' } },
+    { id: 2, data: new Date().toISOString(), processo: { numeroProcesso: '00124-SP' } },
   ],
   recentCases: [
     { id: 1, titulo: 'Processo Teste', lastUpdateAt: new Date().toISOString() },

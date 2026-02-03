@@ -47,7 +47,7 @@ items: [
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       lastUpdateAt: new Date().toISOString(),
-      client: {
+      cliente: {
         id: 1,
         nome: 'João Silva',
         email: 'joao@email.com',
@@ -70,7 +70,7 @@ items: [
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       lastUpdateAt: new Date().toISOString(),
-      client: {
+      cliente: {
         id: 2,
         nome: 'Maria Santos',
         email: 'maria@email.com',
@@ -93,7 +93,7 @@ items: [
       created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
       updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
       lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-      client: {
+      cliente: {
         id: 1,
         nome: 'João Silva',
         email: 'joao@email.com',

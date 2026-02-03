@@ -1,10 +1,8 @@
+// src/app/layout.tsx
 import type { Metadata } from "next";
-import { Geist, Geist_Mono } from "next/font/google";
-import { Inter } from 'next/font/google';
+import { Geist, Geist_Mono, Inter } from "next/font/google";
 import "./globals.css";
 import { AuthProvider } from "../contexts/AuthContexts";
-
-
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -19,13 +17,11 @@ const geistMono = Geist_Mono({
 const inter = Inter({ subsets: ['latin'] });
 
 export const metadata: Metadata = {
-  title:{ 
-  template: "%s - consultaFacil",
-  default: 'consultaFacil'
+  title: { 
+    template: "%s - consultaFacil",
+    default: 'consultaFacil'
   }
 };
-
-
 
 export default function RootLayout({
   children,
@@ -33,18 +29,22 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="pt-BR">
+    // Adicionado suppressHydrationWarning no <html> para ignorar atributos de extensões
+    <html lang="pt-BR" suppressHydrationWarning>
       <head>
         <link
           rel="stylesheet"
           href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
         />
       </head>
-      <body className={inter.className}>
+      {/* Adicionado suppressHydrationWarning no <body> para silenciar o erro específico 
+          mostrado no seu log relacionado ao cz-shortcut-listen
+      */}
+      <body className={inter.className} suppressHydrationWarning>
         <AuthProvider> 
           {children} 
         </AuthProvider>
-        </body>
+      </body>
     </html>
   );
 }

@@ -38,7 +38,7 @@ items: [
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       lastUpdateAt: new Date().toISOString(),
-      client: {
+      cliente: {
         id: 1,
         nome: 'João Silva',
         email: 'joao@email.com',
@@ -61,7 +61,7 @@ items: [
       created_at: new Date().toISOString(),
       updated_at: new Date().toISOString(),
       lastUpdateAt: new Date().toISOString(),
-      client: {
+      cliente: {
         id: 2,
         nome: 'Maria Santos',
         email: 'maria@email.com',
@@ -84,7 +84,7 @@ items: [
       created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
       updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
       lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
-      client: {
+      cliente: {
         id: 1,
         nome: 'João Silva',
         email: 'joao@email.com',
@@ -96,8 +96,251 @@ items: [
         updated_at: new Date().toISOString(),
       }
     },
+    {
+      id: 4,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },{
+      id: 5,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },{
+      id: 6,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },{
+      id: 7,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },{
+      id: 8,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },{
+      id: 9,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },{
+      id: 10,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },{
+      id: 11,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },{
+      id: 12,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },{
+      id: 13,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    },{
+      id: 14,
+      numeroProcesso: '0009876-54.2024.8.26.0300',
+      titulo: 'Inventário',
+      forum: 'Vara de Família',
+      status: ProcessoStatus.GANHO,
+      client_id: 1,
+      user_id: 1,
+      created_at: new Date(Date.now() - 86400000 * 5).toISOString(),
+      updated_at: new Date(Date.now() - 86400000 * 2).toISOString(),
+      lastUpdateAt: new Date(Date.now() - 86400000 * 2).toISOString(),
+      cliente: {
+        id: 1,
+        nome: 'João Silva',
+        email: 'joao@email.com',
+        telefone: '(11) 98765-4321',
+        documento: '123.456.789-00',
+        iniciais: 'JS',
+        color: '#4F46E5',
+        created_at: new Date().toISOString(),
+        updated_at: new Date().toISOString(),
+      }
+    }
   ],
-  total: 3,
+  total: 14, //deixar dinamico
   page: 1,
   limit: 10,
   totalPages: 1
@@ -109,6 +352,10 @@ export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
   const [error, setError] = useState<string | null>(null);
 
   // ✅ Extrair params
+  if(!params.page) {
+        params.page = 1
+      }
+
   const { token, search, status, client_id, page, limit } = params;
 
   // Função para buscar os dados
@@ -136,12 +383,22 @@ export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
         filteredItems = filteredItems.filter(p => p.client_id === client_id);
       }
 
+      console.log("Buscando página:", page)
+
+      
+
+      const itemsPerPage = limit || 5; 
+      const startIndex = (page - 1) * itemsPerPage;
+      const endIndex = startIndex + itemsPerPage;
+
+      const paginatedItems = filteredItems.slice(startIndex, endIndex);
+
       setData({
-        items: filteredItems, 
+        items: paginatedItems, 
         total: filteredItems.length,
         page: page || 1,
-        limit: limit || 10,
-        totalPages: Math.ceil(filteredItems.length / (limit || 10)),
+        limit: limit || 5,
+        totalPages: Math.ceil(filteredItems.length / (limit || 5)),
       });
       setLoading(false);
       setError(null);
@@ -185,12 +442,11 @@ export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
     }
   }, [token, search, status, client_id, page, limit]);
 
-  // ✅ Debounce para busca (300ms)
+
   useEffect(() => {
     const timeoutId = setTimeout(() => {
       fetchData();
     }, 300);
-
     return () => clearTimeout(timeoutId);
   }, [fetchData]);
 

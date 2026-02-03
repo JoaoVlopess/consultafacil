@@ -9,6 +9,15 @@ import {
   ProcessoStatus 
 } from '@/src/types/process';
 
+export const mockClients = [
+  { id: 1, nome: "Maria Silva", email: "maria.silva@email.com", telefone: "(85) 98765-4321", documento: "123.456.789-00", iniciais: "MS", color: "from-blue-500 to-indigo-600" },
+  { id: 2, nome: "João Santos", email: "joao.santos@empresa.com", telefone: "(85) 99123-4567", documento: "987.654.321-00", iniciais: "JS", color: "from-purple-500 to-pink-600" },
+  { id: 3, nome: "Ana Paula Oliveira", email: "ana.oliveira@email.com", telefone: "(85) 98888-9999", documento: "456.789.123-00", iniciais: "AP", color: "from-green-500 to-emerald-600" },
+  { id: 4, nome: "Carlos Lima", email: "carlos.lima@gmail.com", telefone: "(85) 97777-8888", documento: "789.123.456-00", iniciais: "CL", color: "from-orange-500 to-red-600" },
+  { id: 5, nome: "Fernanda Martins", email: "fernanda.m@outlook.com", telefone: "(85) 96666-7777", documento: "321.654.987-00", iniciais: "FM", color: "from-cyan-500 to-blue-600" },
+  { id: 6, nome: "Ricardo Souza", email: "ricardo.souza@yahoo.com", telefone: "(85) 95555-4444", documento: "654.321.987-11", iniciais: "RS", color: "from-yellow-500 to-orange-600" },
+];
+
 interface UseProcessosParams {
   token: string | null;
   search?: string;

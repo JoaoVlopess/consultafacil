@@ -1,11 +1,12 @@
-interface Client {
-  id: number;
-  nome: string;
-  email: string;
-  telefone: string;
-  documento: string;
-  iniciais: string;
-  color: string;
-  created_at: String;
-  updated_at?: String;
+export interface Cliente {
+  id: string;                    
+  nome: string;                  
+  documento: string | null;      
+  email: string | null;          
+  telefone: string | null;       
+  observacoes: string | null;    
+  createdBy: string;             
+  updatedBy: string | null;      
+  createdAt: string;          
+  updatedAt: string;             
 }

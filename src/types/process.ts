@@ -2,6 +2,7 @@
 // src/types/process.ts
 
 import { Hearing } from "./audiencia";
+import { Cliente } from "./client";
 
 /**
  * ===============================================
@@ -41,7 +42,7 @@ export interface Process {
   deleted_at?: string | null;      // ISO date string ou null
   
   // Relações (quando incluídas no backend)
-  client?: Client;                // Relação com cliente
+  client?: Cliente;                // Relação com cliente
   audiencias?: Hearing[];          // Relação com audiências
 }
 

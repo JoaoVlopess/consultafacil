@@ -34,18 +34,18 @@ export function useDashboard(token?: string): UseDashboardReturn {
 
 const fetchData = async () => {
     // Se não houver token, usamos o mock e encerramos a função sem retornar valor
-    if (!token) {
+    /*if (!token) {
       setData(mockData as any); // O 'as any' é para evitar conflito de tipos com o mock
       setLoading(false);
       setError(null);
       return; // Aqui retornamos 'void', resolvendo o erro do TS
-    }
+    }*/
 
-        // if (!token) {
-    //   setError('Token não fornecido');
-    //   setLoading(false);
-    //   return;
-    // }
+         if (!token) {
+       setError('Token não fornecido');
+       setLoading(false);
+       return;
+     }
 
     try {
       setLoading(true);

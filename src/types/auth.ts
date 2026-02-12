@@ -8,7 +8,7 @@ export interface SignUpDto {
   email: string;
   registro_oab: string;     
   password: string;
-  created_by: string;        
+  created_by?: string;        
 }
 
 export interface SignUpFormData {
@@ -16,12 +16,12 @@ export interface SignUpFormData {
   email: string;
   registro_oab: string;
   password: string;
-  confirmPassword: string; 
+  confirmPassword?: string; 
 }
 
 export interface AuthResponse {
-  access_token: string;
-  user: User;
+  token: string;   
+  perfil: User;    
 }
 
 export interface User {
@@ -41,6 +41,6 @@ export interface AuthContextType {
   isAuthenticated: boolean;
   isLoading: boolean;
   login: (credentials: AuthDto) => Promise<void>;
-  signup: (data: SignUpDto) => Promise<void>;
+  signup: (data: SignUpFormData) => Promise<void>;
   logout: () => void;
 }

@@ -3,5 +3,5 @@
   data: string;
   local?: string;
   notas?: string;
-  // ... outros campos
+
 }

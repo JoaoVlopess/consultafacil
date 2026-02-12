@@ -34,11 +34,11 @@ export interface Process {
 
 
 export interface CreateProcessDto {
-  numeroProcesso: string;          // Obrigatório
-  titulo: string;                  // Obrigatório
-  forum?: string;                  // Opcional
-  status: ProcessoStatus;          // Obrigatório (default PENDENTE)
-  client_id: number;               // Obrigatório
+  numeroProcesso: string;          
+  titulo: string;                  
+  forum?: string;                  
+  status: ProcessoStatus;          
+  client_id: number;               
 }
 
 /**
@@ -52,7 +52,7 @@ export interface UpdateProcessDto {
   forum?: string;
   status?: ProcessoStatus;
   client_id?: number;
-  lastUpdateAt?: string;           // ISO date string
+  lastUpdateAt?: string;           
 }
 
 /**
@@ -60,11 +60,11 @@ export interface UpdateProcessDto {
  * Usado em GET /processos?search=&status=&client_id=&page=&limit=
  */
 export interface ProcessQueryParams {
-  search?: string;                 // Busca por número ou título
-  status?: ProcessoStatus;         // Filtrar por status
-  client_id?: number;              // Filtrar por cliente
-  page?: number;                   // Página atual (default: 1)
-  limit?: number;                  // Itens por página (default: 10)
+  search?: string;                 
+  status?: ProcessoStatus;         
+  client_id?: number;              
+  page?: number;                   
+  limit?: number;                  
 }
 
 /**
@@ -96,7 +96,7 @@ export interface ProcessFormData {
   status: ProcessoStatus;
   client_id: number;
   // Campos extras para UX (não enviados ao backend)
-  confirmacao?: boolean;           // Checkbox de confirmação
+  confirmacao?: boolean;           
 }
 
 /**
@@ -104,12 +104,12 @@ export interface ProcessFormData {
  * Calculado no frontend a partir da lista
  */
 export interface ProcessStats {
-  emAndamento: number;             // Status = EM_ANDAMENTO
-  ganhos: number;                  // Status = GANHO
-  perdidos: number;                // Status = PERDIDO
-  arquivados: number;              // Status = ARQUIVADO
-  pendentes: number;               // Status = PENDENTE
-  total: number;                   // Todos
+  emAndamento: number;             
+  ganhos: number;                  
+  perdidos: number;                
+  arquivados: number;              
+  pendentes: number;               
+  total: number;                  
 }
 
 /**
@@ -125,17 +125,16 @@ export interface ProcessCardProps {
  * Props para ProcessForm
  */
 export interface ProcessFormProps {
-  process: Process | null;         // null = criar novo, Process = editar
-  onSuccess: () => void;
+  process: Process | null;        
   onCancel: () => void;
 }
 
 export type StatusColorMap = {
   [key in ProcessoStatus]: {
-    badge: string;                 // Classes Tailwind para badge
-    bg: string;                    // Cor de fundo
-    text: string;                  // Cor do texto
-    icon: string;                  // Ícone Font Awesome
+    badge: string;                 
+    bg: string;                   
+    text: string;             
+    icon: string;                 
   };
 };
 

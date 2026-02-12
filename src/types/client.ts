@@ -1,44 +1,31 @@
 
 export interface Cliente {
-  id: number;                    // ID do cliente
-  nome: string;                  // Nome completo ou razão social
-  documento: string | null;      // CPF ou CNPJ (opcional)
-  email: string | null;          // Email do cliente (opcional)
-  telefone: string | null;       // Telefone do cliente (opcional)
-  observacoes?: string | null;    // Observações internas (opcional)
-  user_id?: number;               // ID do advogado dono do cliente
-  created_by?: string;            // ID do usuário que criou (string)
-  updated_by?: string | null;     // ID do usuário que atualizou (string, opcional)
-  deleted_by?: string | null;     // ID do usuário que deletou (string, opcional)
+  id: number;                    
+  nome: string;                  
+  documento: string | null;      
+  email: string | null;          
+  telefone: string | null;       
+  observacoes?: string | null;    
+  user_id?: number;               
+  created_by?: string;            
+  updated_by?: string | null;    
+  deleted_by?: string | null;     
   iniciais?: string
   color?: string
-  created_at?: string;            // Data de criação (ISO string)
-  updated_at?: string;            // Data de atualização (ISO string)
-  deleted_at?: string | null;     // Data de deleção - soft delete (ISO string, opcional)
+  created_at?: string;            
+  updated_at?: string;            
+  deleted_at?: string | null;     
 }
 
-/**
- * CreateClienteDto - Dados para criar um novo cliente
- * 
- * IMPORTANTE: NÃO incluir campos que o backend adiciona automaticamente:
- * - id (banco gera)
- * - user_id (backend pega do token JWT)
- * - created_by (backend pega do token JWT)
- * - created_at, updated_at (banco gera)
- */
 export interface CreateClienteDto {
-  nome: string;           // Obrigatório
-  documento?: string;     // Opcional
-  email?: string;         // Opcional
-  telefone?: string;      // Opcional
-  observacoes?: string;   // Opcional
+  nome: string;           
+  documento?: string;     
+  email?: string;        
+  telefone?: string;      
+  observacoes?: string;   
 }
 
-/**
- * UpdateClienteDto - Dados para atualizar um cliente
- * 
- * Todos os campos são opcionais
- */
+
 export interface UpdateClienteDto {
   nome?: string;
   documento?: string;
@@ -53,9 +40,9 @@ export interface UpdateClienteDto {
  * Baseado no ClienteQueryDto do backend
  */
 export interface ClienteQueryParams {
-  search?: string;   // Termo de busca (nome, documento, email)
-  page?: number;     // Página atual (default: 1)
-  limit?: number;    // Itens por página (default: 10)
+  search?: string;   
+  page?: number;     
+  limit?: number;  
 }
 
 /**
@@ -64,10 +51,10 @@ export interface ClienteQueryParams {
  * Estrutura retornada pelo endpoint GET /clientes
  */
 export interface ClientesResponse {
-  data: Cliente[];   // Array de clientes
-  total: number;     // Total de registros
-  page: number;      // Página atual
-  limit: number;     // Itens por página
+  data: Cliente[];   
+  total: number;    
+  page: number;      
+  limit: number;     
 }
 
 /**
@@ -97,17 +84,17 @@ export interface ApiError {
  * Para os cards: "Processos Ativos", "Novos esse Mês", "Total de Clientes"
  */
 export interface ClienteStats {
-  processosAtivos: number;   // 23
-  novosEsteMes: number;      // 2
-  totalClientes: number;     // 28
+  processosAtivos: number;   
+  novosEsteMes: number;      
+  totalClientes: number;     
 }
 
 
 export interface ClienteDisplay extends Cliente {
-  iniciais: string;              // Ex: "MS" para "Maria Silva"
-  documentoFormatado?: string;   // Ex: "123.456.789-00"
-  telefoneFormatado?: string;    // Ex: "(85) 98765-4321"
-  avatarColor: string;           // Cor do avatar baseada no nome
+  iniciais: string;             
+  documentoFormatado?: string;  
+  telefoneFormatado?: string;   
+  avatarColor: string;           
 }
 
 

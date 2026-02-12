@@ -123,7 +123,7 @@ export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
   // Função para buscar os dados
   const fetchData = useCallback(async () => {
     // ✅ Se não houver token, usa mock
-    if (!token) {
+    /*if (!token) {
       console.log('🔵 Usando dados MOCK (sem token)');
       
       // ✅ Aplicar filtros no mock
@@ -155,7 +155,7 @@ export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
       setLoading(false);
       setError(null);
       return;
-    }
+    }*/
 
     // ✅ Com token, faz requisição real
     try {

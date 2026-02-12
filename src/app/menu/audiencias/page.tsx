@@ -34,7 +34,8 @@ const Page = () => {
     //   ganhos: data?.items.filter(p => p.status === ProcessoStatus.GANHO).length || 0,
     //   arquivados: data?.items.filter(p => p.status === ProcessoStatus.ARQUIVADO).length || 0,
     //   total: data?.total || 0,
-    // };
+    
+    // }; usar <AudienciasStats stats={stats} />
 
   const handleNewAudience = () => {
 
@@ -48,7 +49,7 @@ const Page = () => {
               buttonLabel="Nova audiência"
               onButtonClick={handleNewAudience}
             />
-      <AudienciasStats stats={stats} />
+       
     </div>
   )
 }

@@ -10,7 +10,6 @@ import {
 } from '@/src/types/process';
 
 interface UseProcessosParams {
-  token: string | null;
   search?: string;
   status?: ProcessoStatus;      
   client_id?: number;          
@@ -25,7 +24,7 @@ interface UseProcessosReturn {
   refetch: () => Promise<void>;
 }
 
-const mockData: ProcessesResponse = {
+/*const mockData: ProcessesResponse = {
 items: [
     {
       id: 1,
@@ -344,7 +343,7 @@ items: [
   page: 1,
   limit: 10,
   totalPages: 1
-};
+};*/
 
 export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
   const [data, setData] = useState<ProcessesResponse | null>(null);
@@ -356,12 +355,12 @@ export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
         params.page = 1
       }
 
-  const { token, search, status, client_id, page, limit } = params;
+  const { search, status, client_id, page, limit } = params;
 
   // Função para buscar os dados
   const fetchData = useCallback(async () => {
     // ✅ Se não houver token, usa mock
-    if (!token) {
+   /* if (!token) {
       console.log('🔵 Usando dados MOCK (sem token)');
       
       // ✅ Aplicar filtros no mock
@@ -402,8 +401,8 @@ export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
       });
       setLoading(false);
       setError(null);
-      return;
-    }
+     / return;
+  }*/ 
 
     // ✅ Com token, faz requisição real
     try {
@@ -440,7 +439,7 @@ export function useProcessos(params: UseProcessosParams): UseProcessosReturn {
     } finally {
       setLoading(false);
     }
-  }, [token, search, status, client_id, page, limit]);
+  }, [ search, status, client_id, page, limit]);
 
 
   useEffect(() => {

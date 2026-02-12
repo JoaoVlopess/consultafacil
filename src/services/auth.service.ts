@@ -17,18 +17,13 @@ export class AuthService {
   /**
    * SignUp - POST /auth/signUp
    */
-  static async signup(formData: SignUpFormData): Promise<AuthResponse> {
-    const signUpDto: SignUpDto = {
-      nome: formData.nome,
-      email: formData.email,
-      registro_oab: formData.registro_oab,
-      password: formData.password,
-      created_by: formData.email, 
-    };
+   static async signup(formData: SignUpFormData): Promise<any> {
+    
+    const { confirmPassword, ...signUpData } = formData;
 
-    return fetchAPI<AuthResponse>('/auth/signUp', {
+    return fetchAPI<any>('/auth/signUp', {
       method: 'POST',
-      body: JSON.stringify(signUpDto),
+      body: JSON.stringify(signUpData),
     });
   }
 

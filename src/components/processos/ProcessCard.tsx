@@ -1,5 +1,4 @@
 //   # Card individual de processo
-// src/components/processos/ProcessCard.tsx
 
 import { formatDistanceToNow } from 'date-fns';
 import { ptBR } from 'date-fns/locale';

@@ -9,11 +9,6 @@ import type {
   ClienteStats,
 } from '@/src/types/client';
 
-/**
- * Helper para obter o token do localStorage
- * Ajuste conforme sua estratégia de autenticação
- */
-
 export const clienteService = {
   /**
    * Busca clientes com paginação e busca
@@ -31,7 +26,6 @@ export const clienteService = {
    */
   async getAll(
     params: ClienteQueryParams = {},
-    token?: string
   ): Promise<ClientesResponse> {
     const { page = 1, limit = 10, search = '' } = params;
 
@@ -48,7 +42,6 @@ export const clienteService = {
       `/clientes?${queryParams.toString()}`,
       {
         method: 'GET',
-        token: token,
       }
     );
 
@@ -66,10 +59,10 @@ export const clienteService = {
    * @example
    * const cliente = await clienteService.getById(123);
    */
-  async getById(id: number, token?: string): Promise<Cliente> {
+  async getById(id: number): Promise<Cliente> {
     const data = await fetchAPI<Cliente>(`/clientes/${id}`, {
       method: 'GET',
-      token: token,
+      
     });
 
     return data;
@@ -90,11 +83,11 @@ export const clienteService = {
    *   documento: '12345678900'
    * });
    */
-  async create(clienteData: CreateClienteDto, token?: string): Promise<Cliente> {
+  async create(clienteData: CreateClienteDto): Promise<Cliente> {
     const data = await fetchAPI<Cliente>('/clientes', {
       method: 'POST',
-      body: JSON.stringify(clienteData),
-      token: token ,
+      body: JSON.stringify(clienteData)
+      
     });
 
     return data;
@@ -115,13 +108,13 @@ export const clienteService = {
    */
   async update(
     id: number,
-    clienteData: UpdateClienteDto,
-    token?: string
+    clienteData: UpdateClienteDto
+
   ): Promise<Cliente> {
     const data = await fetchAPI<Cliente>(`/clientes/${id}`, {
       method: 'PATCH',
-      body: JSON.stringify(clienteData),
-      token: token ,
+      body: JSON.stringify(clienteData)
+
     });
 
     return data;
@@ -137,10 +130,10 @@ export const clienteService = {
    * @example
    * await clienteService.delete(123);
    */
-  async delete(id: number, token?: string): Promise<void> {
+  async delete(id: number): Promise<void> {
     await fetchAPI<void>(`/clientes/${id}`, {
-      method: 'DELETE',
-      token: token ,
+      method: 'DELETE'
+
     });
   },
 
@@ -157,13 +150,12 @@ export const clienteService = {
    * const stats = await clienteService.getStats();
    * // { processosAtivos: 23, novosEsteMes: 2, totalClientes: 28 }
    */
-  async getStats(token?: string): Promise<ClienteStats> {
+  async getStats(): Promise<ClienteStats> {
     // TODO: Implementar endpoint no backend
     // Por enquanto, retorna mock baseado na UI
     try {
       const data = await fetchAPI<ClienteStats>('/clientes/stats', {
         method: 'GET',
-        token: token ,
       });
       return data;
     } catch (error) {
@@ -188,8 +180,8 @@ export const clienteService = {
    * @param token - Token JWT (opcional)
    * @returns Promise com clientes encontrados
    */
-  async findByDocumento(documento: string, token?: string): Promise<Cliente[]> {
-    const response = await this.getAll({ search: documento, limit: 1 }, token);
+  async findByDocumento(documento: string): Promise<Cliente[]> {
+    const response = await this.getAll({ search: documento, limit: 1 });
     return response.data.filter((c) => c.documento === documento);
   },
 
@@ -202,8 +194,8 @@ export const clienteService = {
    * @param token - Token JWT (opcional)
    * @returns Promise com clientes encontrados
    */
-  async findByEmail(email: string, token?: string): Promise<Cliente[]> {
-    const response = await this.getAll({ search: email, limit: 1 }, token);
+  async findByEmail(email: string): Promise<Cliente[]> {
+    const response = await this.getAll({ search: email, limit: 1 });
     return response.data.filter((c) => c.email === email);
   },
 };
